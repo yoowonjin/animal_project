@@ -70,23 +70,22 @@
             <h2 class="h2">우리동물의 병원을 찾아보세요</h2>
             <form action="">
                 <input id="myps" type="button" class="but1" value="현재위치로 설정">
-
                 <input type="button" id="selectRegion" class="but1" value="지역선택">
-    <div id="regionSelection" style="display:none;">
-        <select id="city">
-            <option value="울산">울산</option>
-            <option value="부산">부산</option>
-        </select>
-        <select id="district">
-        </select>
-        <select id="town">
-        </select>
-        <input type="button" id="searchHospitals" class="but1" value="검색">
-    </div>
+                <div id="regionSelection" style="display:none;">
+                    <select id="city">
+                        <option value="울산">울산</option>
+                        <option value="부산">부산</option>
+                    </select>
+                    <select id="district">
+                    </select>
+                    <select id="town">
+                    </select>
+                    <input type="button" id="searchHospitals" class="but1" value="검색">
+                </div>
+                <br><br><br>
 
-<!--                 
-                <input type="button" class="but1" value="지역선택"><br><br><br>
-                <input type="button" class="but2" value="강아지">
+
+                <!-- <input type="button" class="but2" value="강아지">
                 <input type="button" class="but2" value="고양이">
                 <input type="button" class="but2" value="조류">
                 <input type="button" class="but2" value="소동물"> -->
@@ -105,8 +104,8 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    <!-- 키워드 : <input type="text" value="동물병원" id="keyword" size="15">  -->
-                    <!-- <button type="submit">검색</button>  -->
+                    키워드 : <input type="text" value="동물병원" id="keyword" size="15"> 
+                    <button type="submit">검색</button> 
                 </form>
             </div>
         </div>
@@ -173,5 +172,5 @@
         <div class="footer-r">27</div>
     </div>
 </body>
-<script src="./js/map copy.js"></script>
+<script src="./js/map copy 2.js.js"></script>
 </html>

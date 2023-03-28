@@ -1,5 +1,3 @@
-var isInitialLoad = true;
-var currentLocation = null;
 // 마커를 담을 배열입니다
 var markers = [];
 
@@ -46,17 +44,16 @@ function placesSearchCB(data, status, pagination) {
         // 페이지 번호를 표출합니다
         displayPagination(pagination);
 
-        isInitialLoad = false; // 검색이 완료되면 isInitialLoad를 false로 설정합니다.
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-        if (!isInitialLoad) {
-            alert('검색 결과가 존재하지 않습니다. 다른 지역을 선택해주세요.');
-        }
-        isInitialLoad = false; // 검색이 완료되면 isInitialLoad를 false로 설정합니다.
+
+        alert('검색 결과가 존재하지 않습니다.');
         return;
+
     } else if (status === kakao.maps.services.Status.ERROR) {
+
         alert('검색 결과 중 오류가 발생했습니다.');
-        isInitialLoad = false; // 검색이 완료되면 isInitialLoad를 false로 설정합니다.
         return;
+
     }
 }
 
@@ -212,13 +209,11 @@ function displayPagination(pagination) {
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-    var distance = getDistance(currentLocation, marker.getPosition());
-    var content = '<div style="padding:5px;z-index:1;">' + title + '<br>거리: ' + distance.toFixed(2) + 'm</div>';
+    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
 }
-
 
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 function removeAllChildNods(el) {   
@@ -234,17 +229,16 @@ function removeAllChildNods(el) {
                 var lat = position.coords.latitude,
                     lon = position.coords.longitude;
                 var locPosition = new kakao.maps.LatLng(lat, lon);
-                currentLocation = locPosition; // 현재 위치를 저장합니다.
                 map.setCenter(locPosition);
-                // searchPlaces();
+                searchPlaces();
                 addRedMarker(locPosition); // 현재 위치에 빨간색 마커 추가
             }, function() {
                 alert('Geolocation을 지원하지 않으므로, 기본 위치를 중심으로 검색합니다.');
-                // searchPlaces();
+                searchPlaces();
             });
         } else {
             alert('이 브라우저에서는 Geolocation이 지원되지 않습니다. 기본 위치를 중심으로 검색합니다.');
-            // searchPlaces();
+            searchPlaces();
         }
     }
 
@@ -258,27 +252,9 @@ function removeAllChildNods(el) {
         });
     }
 
-    document.getElementById("myps").addEventListener("click", function () {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var lat = position.coords.latitude;
-                var lng = position.coords.longitude;
-                var coords = new kakao.maps.LatLng(lat, lng);
-                searchPlacesByCurrentLocation(coords);
-            });
-        } else {
-            alert("브라우저가 위치 정보를 지원하지 않습니다.");
-        }
+    document.getElementById('myps').addEventListener('click', function() {
+        getCurrentLocation();
     });
-    
-    function searchPlacesByCurrentLocation(coords) {
-        var keyword = '동물병원';
-        ps.keywordSearch(keyword, placesSearchCB, {
-            location: coords,
-            radius: 5000 // 5km 반경 내에서 검색
-        });
-    }
-    
     
 
         // 빨간색 마커를 생성하고 지도 위에 표시하는 함수입니다
@@ -317,92 +293,13 @@ function removeAllChildNods(el) {
           });
       }
 
-      document.getElementById("selectRegion").addEventListener("click", function() {
-        document.getElementById("regionSelection").style.display = "block";
-    });
-    
-    document.getElementById("city").addEventListener("change", function() {
-        updateDistrictsAndTowns();
-    });
-    
-    function updateDistrictsAndTowns() {
-        var city = document.getElementById("city").value;
-        var districts = [];
-        var towns = [];
-    
-        if (city === "울산") {
-            districts = ["남구", "북구"];
-            towns = {
-                "남구": ["삼산동", "신정동"],
-                "북구": ["화산동", "농소동"]
-            };
-        } else if (city === "부산") {
-            districts = ["중구", "해운대구"];
-            towns = {
-                "중구": ["중앙동", "동광동"],
-                "해운대구": ["재송동", "우동"]
-            };
-        }
-    
-        var districtSelect = document.getElementById("district");
-        districtSelect.innerHTML = "";
-        districts.forEach(function(district) {
-            var option = document.createElement("option");
-            option.value = district;
-            option.text = district;
-            districtSelect.appendChild(option);
-        });
-    
-        updateTowns(towns);
-        districtSelect.addEventListener("change", function() {
-            updateTowns(towns);
-        });
-    }
-    
-    function updateTowns(towns) {
-        var selectedDistrict = document.getElementById("district").value;
-        var townSelect = document.getElementById("town");
-        townSelect.innerHTML = "";
-        towns[selectedDistrict].forEach(function(town) {
-            var option = document.createElement("option");
-            option.value = town;
-            option.text = town;
-            townSelect.appendChild(option);
-        });
-    }
-    
-    updateDistrictsAndTowns();
-    
-    document.getElementById("searchHospitals").addEventListener("click", function() {
-        var city = document.getElementById("city").value;
-        var district = document.getElementById("district").value;
-        var town = document.getElementById("town").value;
-        searchPlaces(city, district, town);
-    });
-    
-    function searchPlaces(city, district, town) {
-        var keyword = '동물병원 ' + city + ' ' + district + ' ' + town;
-        ps.keywordSearch(keyword, placesSearchCB, {
-            location: map.getCenter(),
-            radius: 5000 // 5km 반경 내에서 검색
-        });
-    }
-    
 
-    window.onload = function() {
-        init();
-    };
-    
-    function init() {
-        // 지도를 생성하고 현재 위치를 얻어옵니다
-        getCurrentLocation();
-    }
-    
 
-    //거리계산함수
-    function getDistance(p1, p2) {
-        return kakao.maps.services.Util.computeDistance(p1, p2);
-    }
+
+
+
+
+      
 
 
     // 지도를 생성하고 현재 위치를 얻어옵니다
