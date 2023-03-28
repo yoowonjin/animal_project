@@ -70,15 +70,35 @@
             <h2 class="h2">우리동물의 병원을 찾아보세요</h2>
             <form action="">
                 <input id="myps" type="button" class="but1" value="현재위치로 설정">
-                <input type="button" class="but1" value="지역선택"><br><br><br>
-                <input type="button" class="but2" value="강아지">
-                <input type="button" class="but2" value="고양이">
-                <input type="button" class="but2" value="조류">
-                <input type="button" class="but2" value="소동물">
+                <!-- <input type="button" class="but1" value="지역선택"><br><br><br> -->
+
+
+                <!--  -->
+                <!-- 지역 선택 버튼 -->
+                <button id="open-modal" class="but1">지역 선택</button>
+
+                <!-- 지역 선택 모달 -->
+                <div id="region-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>지역 선택</h2>
+                        <label for="city-select">도시:</label>
+                        <select id="city-select">
+                            <option value="울산">울산</option>
+                            <option value="부산">부산</option>
+                        </select>
+                        <br><br>
+                        <label for="district-select">구:</label>
+                        <select id="district-select">
+                        </select>
+                        <br><br>
+                        <button id="search-hospitals">동물병원 검색</button>
+                    </div>
+                </div>
+                <!--  -->
 
                 
 
-                <!-- <input type="button" class="search" value="검색하기"> -->
             </form>
         </div>
         <div class="midmenu-r">6</div>
@@ -90,8 +110,6 @@
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="동물병원" id="keyword" size="15"> 
-                    <button type="submit">검색</button> 
                 </form>
             </div>
         </div>
@@ -105,8 +123,8 @@
         <div class="botmenu">
             <h3 style="display: inline-block;">울산 남구</h3>
             <form action="" class="botinner" >
-                <input type="button" class="butt" value="강아지">
-                <input type="button" class="butt" value="고양이">
+                <!-- <input type="button" class="butt" value="강아지">
+                <input type="button" class="butt" value="고양이"> -->
             </form>
             <select class="sel">
                 <option value="">거리순</option>
