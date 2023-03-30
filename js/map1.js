@@ -56,5 +56,3 @@ function placesSearchCB(data, status, pagination) {
 
     }
 }
-
-

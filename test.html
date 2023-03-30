@@ -70,7 +70,28 @@
             <h2 class="h2">우리동물의 병원을 찾아보세요</h2>
             <form action="">
                 <input id="myps" type="button" class="but1" value="현재위치로 설정">
-                <input type="button" class="but1" value="지역선택">
+                <!-- 지역선택 버튼 -->
+                
+                    <button type="button" class="but1" id="areaSelectOpen">지역선택</button>
+                
+                <div id="areaModal">
+                    <div class="areaModal_content">
+                        <select id="area">
+                            <option value="">지역 선택</option>
+                            <option value="부산">부산</option>
+                            <option value="울산">울산</option>
+                        </select>
+                        <select id="district">
+                            <option value="">구 선택</option>
+                            <!-- 필요한 구 옵션을 추가하세요. -->
+                        </select>
+                        <button id="">검색</button>
+                        <button type="button" id="areaSelectClose">닫기</button>
+                       
+                    </div>
+                    <div class="modal_layer"></div>
+                </div>
+
                 
                 
 
@@ -122,10 +143,7 @@
                     </div>
                     <div id="modal" role="dialog">
                         <div class="modal_content find1">
-                            <!-- <h2>모달 창</h2> -->
                             병원검색결과1
-                            <!-- <p>모달 창 입니다.</p> -->
-                    
                             <button type="button" id="modal_close_btn">닫기</button>
                     
                         </div>
@@ -135,19 +153,6 @@
                 </div>
             </div>
         <!-- </div> -->
-        <div id="modal">
-   
-            <div class="modal_content">
-                <h2>모달 창</h2>
-               
-                <p>모달 창 입니다.</p>
-               
-                <button type="button" id="modal_close_btn">모달 창 닫기</button>
-               
-            </div>
-           
-            <div class="modal_layer"></div>
-        </div>
 
 
         <div class="find1-r">15</div>
@@ -199,4 +204,5 @@
 <script src="./js/map1.js"></script>
 <script src="./js/map2.js"></script>
 <script src="./js/map3.js"></script>
+<script src="./js/map4.js"></script>
 </html>
