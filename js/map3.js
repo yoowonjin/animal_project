@@ -1,5 +1,5 @@
 
-// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+// 검색결과 목록 하단에 페이지번호를 표시하는 함수입니다
 function displayPagination(pagination) {
     var paginationEl = document.getElementById('pagination'),
         fragment = document.createDocumentFragment(),
@@ -65,31 +65,16 @@ function removeAllChildNods(el) {
             searchPlaces();
         }
     }
-////////////////////////////////////////////////////////////////
-    // 키워드로 장소를 검색합니다
-    // function searchPlaces() {
-    //     var keyword = '동물병원';
-    //     var center = map.getCenter();
-    //     ps.keywordSearch(keyword, placesSearchCB, {
-    //         location: center,
-    //         radius: 5000 // 5km 반경 내에서 검색
-    //     });
-    // }
 
-    // 키워드와 선택된 지역으로 장소를 검색합니다
-    function searchPlacesWithRegion(city, district) {
-        var keyword = '동물병원 ' + city + ' ' + district;
+    // 키워드로 장소를 검색합니다
+    function searchPlaces() {
+        var keyword = '동물병원';
         var center = map.getCenter();
         ps.keywordSearch(keyword, placesSearchCB, {
-        location: center,
-        radius: 5000 // 5km 반경 내에서 검색
+            location: center,
+            radius: 5000 // 5km 반경 내에서 검색
         });
     }
-  
-
-
-
-
 
     document.getElementById('myps').addEventListener('click', function() {
         getCurrentLocation();
@@ -133,65 +118,26 @@ function removeAllChildNods(el) {
       }
 
 
-///////////////////////////////////////////////////
+
 // 모달 실험
-// 지역 선택 모달 관련 코드
-const regionModal = document.getElementById("region-modal");
-const openModalBtn = document.getElementById("open-modal");
-const closeModalBtn = document.querySelector(".close");
-const citySelect = document.getElementById("city-select");
-const districtSelect = document.getElementById("district-select");
-const searchHospitalsBtn = document.getElementById("search-hospitals");
+document.getElementById("modal_opne_btn").onclick = function() {
+    document.getElementById("modal").style.display="block";
+}
 
-// 도시 및 구 데이터
-const cityDistrictData = {
-  울산: ["중구", "남구", "동구", "북구", "울주군"],
-  부산: ["중구", "서구", "동구", "영도구", "부산진구", "동래구", "남구", "북구", "해운대구", "사하구", "금정구", "강서구", "연제구", "수영구", "사상구", "기장군"]
-};
+document.getElementById("modal_close_btn").onclick = function() {
+    document.getElementById("modal").style.display="none";
+}   
 
-// 모달 창 열기
-openModalBtn.addEventListener("click", function () {
-  regionModal.style.display = "block";
-  updateDistrictOptions(citySelect.value);
+$("#modal_opne_btn").click(function(){
+    $("#modal").attr("style", "display:block");
 });
 
-// 모달 창 닫기
-closeModalBtn.addEventListener("click", function () {
-    regionModal.style.display = "none";
-});
+ $("#modal_close_btn").click(function(){
+    $("#modal").attr("style", "display:none");
+});      
+
+      
 
 
-// 도시 선택에 따라 구 목록 업데이트
-citySelect.addEventListener("change", function () {
-    updateDistrictOptions(citySelect.value);
-    });
-
-// 도시에 해당하는 구 목록을 업데이트하는 함수입니다. 이 함수를 기존의 JavaScript 코드에 추가하세요.
-function updateDistrictOptions(city) {
-    const districts = cityDistrictData[city];
-    districtSelect.innerHTML = "";
-    
-    districts.forEach(district => {
-    const option = document.createElement("option");
-    option.value = district;
-    option.text = district;
-    districtSelect.add(option);
-    });
-    }
-
-    // 지역 선택에 따른 동물병원 검색
-searchHospitalsBtn.addEventListener("click", function () {
-    regionModal.style.display = "none";
-    // 선택된 도시 및 구를 가져옵니다.
-    const selectedCity = citySelect.value;
-    const selectedDistrict = districtSelect.value;
-    
-    // 동물병원 검색 함수를 수정하여 지역 선택에 따른 검색 결과를 얻을 수 있도록 합니다.
-    searchPlacesWithRegion(selectedCity, selectedDistrict);
-    });
-
-
-
-    /////////////////////////////////
     // 지도를 생성하고 현재 위치를 얻어옵니다
     getCurrentLocation();

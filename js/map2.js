@@ -22,6 +22,7 @@ function displayPlaces(places) {
 
         // 검색 결과를 병원검색결과1,2,3,4에 표시합니다.
         const resultDiv = document.querySelector(`.find${i + 1}`);
+        
         resultDiv.innerHTML = `<b>병원 이름:</b> ${places[i].place_name}<br><b>주소:</b> ${places[i].road_address_name || places[i].address_name}<br><b>전화번호:</b> ${places[i].phone}`;
             
 
