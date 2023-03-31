@@ -1,4 +1,5 @@
-//지역 검색 모달 실험
+//map4.js
+//지역 검색 모달
 document.getElementById("areaSelectOpen").onclick = function() {
     document.getElementById("areaModal").style.display="block";
 }
@@ -12,6 +13,32 @@ $("#areaSelectOpen").click(function(){
  $("#areaSelectClose").click(function(){
     $("#areaModal").attr("style", "display:none");
 });     
+
+
+//지역 선택
+function categoryChange(e) {
+    const state = document.getElementById("district");
+  
+    const busan = ["강서구","금정구","남구","동구","동래구","부산진구","북구","사상구","사하구","서구","수영구","연제구","영도구","중구","해운대구","기장군"];
+    const ulsan = ["남구","동구","북구","중구","울주군"];
+
+    if (e.value == "울산") {
+      add = ulsan;
+    } else if (e.value == "부산") {
+      add = busan;
+    }
+  
+    state.options.length = 1;
+    // 구 최대;
+  
+      for (property in add) {
+          let opt = document.createElement("option");
+          opt.value = add[property];
+          opt.innerHTML = add[property];
+          state.appendChild(opt);
+      }
+  }
+
 
 
 

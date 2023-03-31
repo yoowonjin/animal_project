@@ -1,0 +1,108 @@
+@charset "utf-8";
+
+/* 병원정보창 모달 */
+#modal {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: none;
+  }
+  
+  #modal button {
+    display: inline-block;
+    width: 100px;
+    margin-left: calc(100% - 100px - 10px);
+  }
+  
+  #modal .modal_content {
+    height: 200px;
+    width: 1500px;
+    margin: auto;
+    /* margin-top: 30px; */
+  
+    padding: 20px 10px;
+    background: #fff;
+    border: 5px solid #c2a46c88;
+  
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+  }
+  
+  #modal .modal_layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  #modal_opne_btn {
+    width: 200px;
+    height: 50px;
+    margin-right: 50px;
+    /* margin-left:calc(100% - 100px - 10px); */
+  }
+  
+  #modal_close_btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    border: 3px solid #c2a46c88;
+  }
+  
+  .AAA {
+    display: flex;
+  }
+  
+  .AAA-1 {
+    background-color: lightgrey;
+  }
+  
+  .AAA-2 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    /* flex-direction: ; */
+  }
+  
+  /* 지역검색 모달 */
+  #areaModal {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: none;
+  }
+  
+  #areaModal button {
+    display: inline-block;
+    width: 100px;
+    /* margin-left: calc(100% - 100px - 10px); */
+  }
+  
+  #areaModal .areaModal_content {
+    height: 200px;
+    width: 500px;
+    margin: auto;
+    z-index: 2;
+    /* margin-top: 30px; */
+  
+    padding: 20px 10px;
+    background: #fff;
+    border: 5px solid #ffd88f;
+    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+  }
+  
+  #areaModal .modal_layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }

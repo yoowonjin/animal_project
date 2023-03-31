@@ -1,4 +1,4 @@
-
+//map3.js
 // 검색결과 목록 하단에 페이지번호를 표시하는 함수입니다
 function displayPagination(pagination) {
     var paginationEl = document.getElementById('pagination'),
@@ -33,7 +33,7 @@ function displayPagination(pagination) {
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
 function displayInfowindow(marker, title) {
-    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+    var content = '<div style="padding:5px;z-index:1;">' + title +  '</div>';
 
     infowindow.setContent(content);
     infowindow.open(map, marker);
@@ -83,8 +83,8 @@ function removeAllChildNods(el) {
 
         // 빨간색 마커를 생성하고 지도 위에 표시하는 함수입니다
         function addRedMarker(position) {
-        var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 마커 이미지 url
-            imageSize = new kakao.maps.Size(64, 69), // 마커 이미지의 크기
+        var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png', // 마커 이미지 url
+            imageSize = new kakao.maps.Size(30, 40), // 마커 이미지의 크기
             imageOption = {offset: new kakao.maps.Point(27, 69)},
             markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
             marker = new kakao.maps.Marker({
@@ -139,3 +139,5 @@ $("#modal_opne_btn").click(function(){
 
     // 지도를 생성하고 현재 위치를 얻어옵니다
     getCurrentLocation();
+
+    

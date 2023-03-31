@@ -1,9 +1,10 @@
+//map1.js
 // 마커를 담을 배열입니다
 var markers = [];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(35.5383773, 129.3113596), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
@@ -19,19 +20,24 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 // 키워드로 장소를 검색합니다
 searchPlaces();
 
+
+
 // 키워드 검색을 요청하는 함수입니다
-function searchPlaces() {
+// function searchPlaces() {
 
-    var keyword = document.getElementById('keyword').value;
+//     var keyword = document.getElementById('keyword').value;
 
-    if (!keyword.replace(/^\s+|\s+$/g, '')) {
-        alert('키워드를 입력해주세요!');
-        return false;
-    }
+//     if (!keyword.replace(/^\s+|\s+$/g, '')) {
+//         alert('키워드를 입력해주세요!');
+//         return false;
+//     }
 
-    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-    ps.keywordSearch( keyword, placesSearchCB); 
-}
+//     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+//     ps.keywordSearch( keyword, placesSearchCB); 
+// }
+
+
+
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
