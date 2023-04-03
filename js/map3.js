@@ -54,7 +54,7 @@ function removeAllChildNods(el) {
                     lon = position.coords.longitude;
                 var locPosition = new kakao.maps.LatLng(lat, lon);
                 map.setCenter(locPosition);
-                searchPlaces();
+                searchPlaces(locPosition); // 변경된 부분: 위치 정보를 전달합니다.
                 addRedMarker(locPosition); // 현재 위치에 빨간색 마커 추가
             }, function() {
                 alert('Geolocation을 지원하지 않으므로, 기본 위치를 중심으로 검색합니다.');
@@ -66,15 +66,58 @@ function removeAllChildNods(el) {
         }
     }
 
-    // 키워드로 장소를 검색합니다
-    function searchPlaces() {
-        var keyword = '동물병원';
-        var center = map.getCenter();
-        ps.keywordSearch(keyword, placesSearchCB, {
-            location: center,
-            radius: 5000 // 5km 반경 내에서 검색
-        });
+    function initialize() {
+        getCurrentLocation();
     }
+    //페이지 접속, 새로고침 시 현재위치에서 검색
+    window.onload = initialize;
+
+
+
+    document.getElementById("searchButton").addEventListener("click", function(event) {
+    event.preventDefault(); // 이벤트 전파를 차단합니다.
+
+    var city = document.getElementById("city").value;
+    var district = document.getElementById("district").value;
+
+    if (city && district) {
+        var geocoder = new kakao.maps.services.Geocoder();
+        geocoder.addressSearch(city + " " + district, function(result, status) {
+            if (status === kakao.maps.services.Status.OK) {
+                var locPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
+                map.setCenter(locPosition);
+                removeMarker();
+                searchPlaces(locPosition);
+                document.getElementById("areaModal").style.display="none";
+            } else {
+                alert("검색 결과가 없습니다. 다른 지역을 선택해 주세요.");
+            }
+        });
+    } else {
+        alert("도시와 구를 선택해 주세요.");
+    }
+});
+
+    
+    
+
+    function searchPlaces(center) {
+        var keyword = '동물병원';
+        var searchOptions = {
+            radius: 15000, // 5km 반경 내에서 검색
+        };
+    
+        if (center) {
+            searchOptions.location = center;
+        } else {
+            searchOptions.location = map.getCenter();
+        }
+    
+        ps.keywordSearch(keyword, placesSearchCB, searchOptions);
+    }
+    
+    
+    
 
     document.getElementById('myps').addEventListener('click', function() {
         getCurrentLocation();
@@ -139,5 +182,6 @@ $("#modal_opne_btn").click(function(){
 
     // 지도를 생성하고 현재 위치를 얻어옵니다
     getCurrentLocation();
+
 
     
